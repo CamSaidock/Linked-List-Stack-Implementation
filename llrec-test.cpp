@@ -84,11 +84,28 @@ int main(int argc, char* argv[])
     Node* head = readList(argv[1]);
     cout << "Original list: ";
     print(head);
+    cout << endl;
+
+    cout << "______Testing Filter______" << endl;
+    Comp pred;
+	Node* head_2 = llfilter(head, pred);
+	print(head);
+    print(head_2);
+    cout << endl;
+
 
     // Test out your linked list code
+    cout << "______Testing Pivot______" << endl;
+    Node* smaller = NULL;
+    Node* larger = NULL;
+    llpivot(head_2, smaller, larger, 10);
 
+    cout << "Smaller: ";
+    print(smaller);
 
-
+    cout << "Larger: ";
+    print(larger);
+    cout << endl;
     
     return 0;
 
