@@ -74,6 +74,9 @@ Node* llfilter(Node* head, Comp pred);
 // Since template implementations should be in a header file, we will
 // implement the above function now.
 //*****************************************************************************
+struct Comp {
+	bool operator()(int input);
+};
 
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
@@ -81,8 +84,23 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
+		if(head == nullptr) {
+			return head;
+		}
 
+		else if(pred(head->val) == true) { //If head->val is ODD (Remove it)
+			Node* temp_Holder = head; //Set holder to hold head pointer
+			head = llfilter(head->next, pred); //Set head equal to next item returned by the function recursively
+			delete temp_Holder; //Delete the holder, removing the pointer
+			return head;
+		}
 
+		else if(pred(head->val) == false) { //If head->val is EVEN
+			head->next = llfilter(head->next, pred);
+			return head;
+		}
+
+		return head;
 }
 
 #endif
